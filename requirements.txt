@@ -1,0 +1,6 @@
+Django==1.7
+django-grappelli==2.6.1
+mysql-python
+fabric
+django-ckeditor
+django-longerusernameandemail==0.5.6

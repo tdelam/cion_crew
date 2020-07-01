@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Insert Your Custom Styles Below. All styles located in this file will
+   override existing main.css stylesheets.
+   ========================================================================== */
+.form-block {
+    margin-top: 25px;
+}
+
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #d9534f;
+}
+
+.errorlist li {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 80%;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+.submenu {
+    margin-top: 25px;
+}
+
+.bordered {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
+
+#error {
+  padding-top: 70px;
+  margin-bottom: -190px;
+}
+
+.error-container {
+  padding: 40px;
+}
+
+.messages { 
+    list-style-type: none; 
+    margin: 0;
+}
+
+.grouper {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.grouper li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.grouper ul ul {
+  margin: 0;
+  padding: 0;
+}
+
+.glyphicon-none:before {
+    content: "\2122";
+    color: transparent !important;
+}
+
+.crew-grouper dd {
+  padding-bottom: 5px;
+}
+
+.add-row {
+    padding-left:18px;
+    background: url(/static/img/add.png) no-repeat left center;
+}
+
+.delete-row {
+    display:block;
+    margin: 35px 0 0 0;
+    font-size: 11px;
+    padding-left:18px;
+    background: url(/static/img/delete.png) no-repeat left center;
+}

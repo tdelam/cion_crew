@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load search_tags %}
+
+{% block title %}
+    Crew Directory
+{% endblock title %}
+
+{% block content %}
+    <section id="signup">
+        <div class="container">
+            <div class="row margin-40">
+                <div class="col-sm-12">
+                    <h3>Crew Directory</h3>
+                </div>
+                <div class="col-sm-4">
+                    {% search_box request %}
+                </div>
+                <div class="col-sm-8">
+                    {% if skills %}
+                        <table class="table table-hover">
+                            {% for skill in skills %}
+                                <tr>
+                                    <td>{{ skill.user.last_name }}, {{ skill.user.first_name }}</td>
+                                    <td>
+                                        {{ skill.user.userprofile_set.get.city }},
+                                        {{ skill.user.userprofile_set.get.get_province_display }}
+                                    </td>
+                                    
+                                    {% if user.is_authenticated %}
+                                        <td>{{ skill.user.userprofile_set.get.phone }}</td>
+                                    {% endif %}
+                                    
+                                    <td><a href="{{ skill.get_absolute_url }}">View profile</a></td>
+                                     
+                                     {% if user.is_authenticated %}
+                                        <td><a href="mailto:{{ skill.user.email }}"><i class="fa fa-envelope"></i></a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

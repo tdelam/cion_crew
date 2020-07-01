@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Sign up
+{% endblock title %}
+
+{% block content %}
+    <section id="signup">
+        <div class="container">
+            <div class="row margin-40">
+                <div class="col-sm-12">
+                    <h3>Crew Registration</h3>
+                    <p><small>Please note, all required fields are marked with asterisks (*)</small></p>
+                    <form method="post" class="form-inline" role="form">{% csrf_token %}
+                        <div class="col-md-12">
+                            <h4>Login Information</h4>
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {% if form.email.field.required %}*{% endif %}
+                                {{ form.email.errors }}
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.password.label_tag }}
+                            {% if form.password.field.required %}*{% endif %}
+                            {{ form.password.errors }}
+                            {{ form.password }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.password_confirmation.label_tag }}
+                            {% if form.password_confirmation.field.required %}*{% endif %}
+                            {{ form.password_confirmation.errors }}
+                            {{ form.password_confirmation }}
+                        </div>
+                        <div class="col-md-12 form-block">
+                            <h4>Contact Information</h4>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.first_name.label_tag }}
+                            {% if form.first_name.field.required %}*{% endif %}
+                            {{ form.first_name.errors }}
+                            {{ form.first_name }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.last_name.label_tag }}
+                            {% if form.last_name.field.required %}*{% endif %}
+                            {{ form.last_name.errors }}
+                            {{ form.last_name }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.company.label_tag }}
+                            {% if form.company.field.required %}*{% endif %}
+                            {{ form.company.errors }}
+                            {{ form.company }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.address.label_tag }}
+                            {% if form.address.field.required %}*{% endif %}
+                            {{ form.address.errors }}
+                            {{ form.address }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.city.label_tag }}
+                            {% if form.city.field.required %}*{% endif %}
+                            {{ form.city.errors }}
+                            {{ form.city }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form.province.label_tag }}
+                            {% if form.province.field.required %}*{% endif %}
+                            {{ form.province.errors }}
+                            {{ form.province }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form.postal_code.label_tag }}
+                            {% if form.postal_code.field.required %}*{% endif %}
+                            {{ form.postal_code.errors }}
+                            {{ form.postal_code }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.phone.label_tag }}
+                            {% if form.phone.field.required %}*{% endif %}
+                            {{ form.phone.errors }}
+                            {{ form.phone }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.website.label_tag }}
+                            {% if form.website.field.required %}*{% endif %}
+                            {{ form.website.errors }}
+                            {{ form.website }}
+                        </div>
+                        <div class="col-md-10">
+                            {{ form.private }}
+                            {{ form.private.label_tag }}
+                        </div>
+                        <div class="col-md-12 form-block">
+                            <button type="submit" class="btn-main"><i class="fa fa-user"></i> Create My Account</button>
+                        </div>
+                        <div class="col-md-12">
+                            <a class="small-message" href="{% url 'login' %}"><small>Already Registered?</small></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

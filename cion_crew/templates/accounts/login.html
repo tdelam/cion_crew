@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <section id="login">
+      <div class="container">
+        <div class="row margin-40">
+            <div class="col-sm-6 col-sm-offset-3 text-center login">
+                <h3>Crew Log In</h3><br />
+                    {% if form.errors %}
+                      <div class="alert alert-danger">
+                          <p>Your username and password didn't match. Please try again.</p>
+                      </div>
+                    {% endif %}
+                    <form method="post" action="." class="form-inline" role="form">{% csrf_token %}
+                        <div class="col-md-8 col-md-offset-2">
+                            <span class="move-left"><label for="id_username">Email:</label></span>
+                            {{ form.username }}
+                        </div>
+                        <div class="col-md-8 col-md-offset-2">
+                            <span class="move-left">{{ form.password.label_tag }}</span>
+                            {{ form.password }}
+                        </div>
+                        <div class="col-md-12 form-block">
+                            <button type="submit" class="btn-main"><i class="fa fa-sign-in"></i> Log In</button>
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </div>
+                        <div class="col-md-12">
+                            <a class="small-message" href="{% url 'signup' %}"><small>Need An Account?</small></a> |
+                            <a class="small-message" href="{% url 'password_reset' %}"><small>Forgot Password?</small></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Welcome, {{ user.get_full_name }}
+{% endblock title %}
+
+{% block content %}
+    <section id="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 white-bg">
+                    <div class="col-md-12">
+                        <h3>{{ user.get_full_name }}</h3>
+                        <hr class="bordered">
+                        {% if user.userprofile_set.get.company %}
+                            <h4>{{ user.userprofile_set.get.company }}</h4>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {% if user.userprofile_set.get.private %}
+                            <span class="label label-primary"><i class="fa fa-lock"></i>  Address is private</span>
+                        {% endif %}
+                        <address>
+                            {% if not user.userprofile_set.get.private %}
+                                {{ user.userprofile_set.get.address }}<br/>
+                            {% endif %}
+                            {{ user.userprofile_set.get.city }},
+                            {{ user.userprofile_set.get.get_province_display }}
+                            {% if not user.userprofile_set.get.private %},
+                                {{ user.userprofile_set.get.postal_code }}
+                            {% endif %}
+                            <br/>
+                            {% if user.userprofile_set.get.phone %}
+                                {{ user.userprofile_set.get.phone }}<br/><br/>
+                            {% endif %}
+                            {% if user.userprofile_set.get.website %}
+                                <a href="{{ user.userprofile_set.get.website }}">{{ user.userprofile_set.get.website }}</a>
+                                <br/>
+                            {% endif %}
+                            <a href="mailto:{{ user.email }}"><i class="fa fa-envelope"></i> {{ user.email }}</a>
+                        </address>
+                    </div>
+                    <div class="col-md-6">
+                        {% if user.skills_set.get.resume %}
+                            <p><a href="{{ MEDIA_URL }}{{ user.skills_set.get.resume }}" target="_blank"><i
+                                    class="fa fa-file"></i> DOWNLOAD RESUME</a></p>
+                        {% endif %}
+                        <div class="list-group">
+                            {% if user.skills_set.get.weblink_1 %}
+                                <a href="{{ user.skills_set.get.weblink_1 }}" class="list-group-item" target="_blank">
+                                    <i class="fa fa-link"></i> {{ user.skills_set.get.weblink_1_description }}
+                                </a>
+                            {% endif %}
+                            {% if user.skills_set.get.weblink_2 %}
+                                <a href="{{ user.skills_set.get.weblink_2 }}" class="list-group-item" target="_blank">
+                                    <i class="fa fa-link"></i> {{ user.skills_set.get.weblink_2_description }}
+                                </a>
+                            {% endif %}
+                            {% if user.skills_set.get.weblink_3 %}
+                                <a href="{{ user.skills_set.get.weblink_3 }}" class="list-group-item" target="_blank">
+                                    <i class="fa fa-link"></i> {{ user.skills_set.get.weblink_3_description }}
+                                </a>
+                            {% endif %}
+                            {% if user.skills_set.get.available_as %}
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                   href="#collapseTwo"
+                                                   aria-expanded="false" aria-controls="collapseTwo">
+                                                    <i class="fa fa-file"></i> Notes
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                             aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                {{ user.skills_set.get.available_as|safe }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <hr class="bordered"/>
+                        <div class="col-md-6">
+                            <h3>Credits</h3>
+
+                            {% regroup credit_options by get_crew_position_display as crew_position_list %}
+                            {% for crew in crew_position_list %}
+                                <dl class="crew-grouper">
+                                    <dt><b>{{ crew.grouper }}</b></dt>
+                                    {% for item in crew.list %}
+                                        <dd>
+                                            {% if item.imdb_credited %}
+                                                <i class="fa fa-star"></i>
+                                            {% else %}
+                                                <i class="glyphicon glyphicon-none"></i>
+                                            {% endif %}
+                                            {{ item.year }}: {{ item.project_name }}
+                                        </dd>
+                                    {% endfor %}
+                                </dl>
+                            {% endfor %}
+
+                            <p><em>Please note: <i class="fa fa-star"></i>
+                                <small>IMDB credited.</small>
+                            </em></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Affiliations</h3>
+                            <ul class="list-group">
+                                {% if user.skills_set.get.dgc %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> DGC Directors Guild of
+                                        Canada
+                                    </li>
+                                {% endif %}
+                                {% if user.skills_set.get.iatse %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> IATSE</li>
+                                {% endif %}
+                                {% if user.skills_set.get.actra %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> ACTRA - Alliance of Cinema,
+                                        Television and Radio Artists
+                                    </li>
+                                {% endif %}
+                                {% if user.skills_set.get.wgc %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> WGC Writers Guild of Canada
+                                    </li>
+                                {% endif %}
+                                {% if user.skills_set.get.cpma %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> CMPA Member</li>
+                                {% endif %}
+                                {% if user.skills_set.get.other %}
+                                    <li class="list-group-item"><i
+                                            class="fa fa-check"></i> {{ user.skills_set.get.other }}</li>
+                                {% endif %}
+                                {% if user.skills_set.get.resident %}
+                                    <li class="list-group-item"><i class="fa fa-check"></i> Northern Ontario
+                                        resident? {{ user.skills_set.get.resident|yesno:"Yes,No" }}</li>
+                                {% endif %}
+                            </ul>
+                            
+                            {% if user.skills_set.get.last_updated %}
+                                <small>
+                                    Last updated: <i>{{ user.skills_set.get.last_updated }}</i>
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

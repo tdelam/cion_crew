@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Skills
+{% endblock title %}
+
+{% block content %}
+    <section id="signup">
+        <div class="container">
+            <div class="row margin-40">
+                <div class="col-sm-12">
+                    <h3>Crew Registration</h3>
+                    <p><small>Please note, all required fields are marked with asterisks (*)</small></p>
+                    <form method="post" class="form-inline" role="form" enctype="multipart/form-data">{% csrf_token %}
+                        <div class="col-md-12">
+                            {{ skills_form.media }}
+                            {{ skills_form.available_as.label_tag }}
+                            <small>{{ skills_form.available_as.help_text }}</small>
+                            {{ skills_form.available_as }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ skills_form.weblink_1.label_tag }}
+                            {% if skills_form.weblink_1.field.required %}*{% endif %}
+                            {{ skills_form.weblink_1.errors }}
+                            {{ skills_form.weblink_1 }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ skills_form.weblink_1_description.label_tag }}
+                            {% if skills_form.weblink_1_description.field.required %}*{% endif %}
+                            {{ skills_form.weblink_1_description.errors }}
+                            {{ skills_form.weblink_1_description }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ skills_form.weblink_2.label_tag }}
+                            {% if skills_form.weblink_2.field.required %}*{% endif %}
+                            {{ skills_form.weblink_2.errors }}
+                            {{ skills_form.weblink_2 }}
+                        </div>
+
+                        <div class="col-md-6">
+                            {{ skills_form.weblink_2_description.label_tag }}
+                            {% if skills_form.weblink_2_description.field.required %}*{% endif %}
+                            {{ skills_form.weblink_2_description.errors }}
+                            {{ skills_form.weblink_2_description }}
+                        </div>
+
+                        <div class="col-md-4">
+                            {{ skills_form.weblink_3.label_tag }}
+                            {% if skills_form.weblink_3.field.required %}*{% endif %}
+                            {{ skills_form.weblink_3.errors }}
+                            {{ skills_form.weblink_3 }}
+                        </div>
+
+                        <div class="col-md-6">
+                            {{ skills_form.weblink_3_description.label_tag }}
+                            {% if skills_form.weblink_3_description.field.required %}*{% endif %}
+                            {{ skills_form.weblink_3_description.errors }}
+                            {{ skills_form.weblink_3_description }}
+                        </div>
+
+                        <div class="col-md-12 form-block">
+                            <h4>Skills and Affiliations</h4>
+                        </div>
+                        <div class="col-md-4">
+                            {{ skills_form.resume.label_tag }}
+                            {% if skills_form.resume.field.required %}*{% endif %}
+                            {{ skills_form.resume.errors }}
+                            {{ skills_form.resume }}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.dgc }}
+                                {{ skills_form.dgc.label_tag }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.iatse }}
+                                {{ skills_form.iatse.label_tag }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.actra }}
+                                {{ skills_form.actra.label_tag }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.wgc }}
+                                {{ skills_form.wgc.label_tag }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.resident }}
+                                {{ skills_form.resident.label_tag }}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.cpma }}
+                                {{ skills_form.cpma.label_tag }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.other.label_tag }}
+                                {{ skills_form.other.errors }}
+                                {{ skills_form.other }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ skills_form.local_number.label_tag }}
+                                {% if skills_form.local_number.field.required %}*{% endif %}
+                                {{ skills_form.local_number.errors }}
+                                {{ skills_form.local_number }}
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-block">
+                            <h4>Credits</h4>
+                        </div>
+                        <div class="col-md-12">
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                            <div class="row row-skills">
+                                {{ form.id }}
+                                <div class="col-md-1">
+                                    {{ form.year.label_tag }}
+                                    {% if form.year.field.required %}*{% endif %}
+                                    {{ form.year.errors }}
+                                    {{ form.year }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form.crew_position.label_tag }}
+                                    {% if form.crew_position.field.required %}*{% endif %}
+                                    {{ form.crew_position.errors }}
+                                    {{ form.crew_position }}
+                                    <small class="help-block">{{ form.crew_position.help_text }}</small>
+                                </div>
+                                <div class="col-md-5">
+                                    {{ form.project_name.label_tag }}
+                                    {% if form.project_name.field.required %}*{% endif %}
+                                    {{ form.project_name.errors }}
+                                    {{ form.project_name }}
+                                </div>
+                                <div class="col-md-1">
+                                    {{ form.imdb_credited.label_tag }}
+                                    {{ form.imdb_credited }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-md-12 form-block">
+                            <button type="submit" class="btn-main">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit profile
+{% endblock title %}
+
+{% block content %}
+    <section id="signup">
+        <div class="container">
+            <div class="row margin-40">
+                <div class="col-sm-12">
+                    <h3>Edit Contact Information</h3>
+                    <p><small>Please note, all required fields are marked with asterisks (*)</small></p>
+                    <form method="post" class="form-inline" role="form">{% csrf_token %}
+                        <div class="col-md-12 form-block">
+                            <h4>Contact Information</h4>
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.company.label_tag }}
+                            {% if form.company.field.required %}*{% endif %}
+                            {{ form.company.errors }}
+                            {{ form.company }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.address.label_tag }}
+                            {% if form.address.field.required %}*{% endif %}
+                            {{ form.address.errors }}
+                            {{ form.address }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.city.label_tag }}
+                            {% if form.city.field.required %}*{% endif %}
+                            {{ form.city.errors }}
+                            {{ form.city }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form.province.label_tag }}
+                            {% if form.province.field.required %}*{% endif %}
+                            {{ form.province.errors }}
+                            {{ form.province }}
+                        </div>
+                        <div class="col-md-2">
+                            {{ form.postal_code.label_tag }}
+                            {% if form.postal_code.field.required %}*{% endif %}
+                            {{ form.postal_code.errors }}
+                            {{ form.postal_code }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.phone.label_tag }}
+                            {% if form.phone.field.required %}*{% endif %}
+                            {{ form.phone.errors }}
+                            {{ form.phone }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.website.label_tag }}
+                            {% if form.website.field.required %}*{% endif %}
+                            {{ form.website.errors }}
+                            {{ form.website }}
+                        </div>
+                        <div class="col-md-10">
+                            {{ form.private }}
+                            {{ form.private.label_tag }}
+                        </div>
+                        <div class="col-md-12 form-block">
+                            <button type="submit" class="btn-main"><i class="fa fa-user"></i> Update Account</button>
+                        </div>
+                    </form>
+
+                    <div class="col-md-12 form-block">
+                        <hr/>
+                        <h3>Account Management</h3>
+                        <p>Please note, all of your activity will also be deleted.</p> 
+                        <p><a href="{% url 'delete_account' %}" class="btn-main"><i class="fa fa-lock"></i> Delete Account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
