@@ -1,4 +1,4 @@
-Django==1.7
+Django==2.2.24
 django-grappelli==2.6.1
 mysql-python
 fabric
